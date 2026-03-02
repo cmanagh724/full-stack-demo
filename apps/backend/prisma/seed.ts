@@ -1,7 +1,14 @@
-import { PrismaClient } from "@prisma/client";
+import "dotenv/config";
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../generated/prisma/client";
+
 import { termSeedData } from "./seedData";
 
-const prisma = new PrismaClient();
+const connectionString = `${process.env.DATABASE_URL}`;
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 // this method will add default values to the database
 // IT WILL CLEAR THE DB WHEN INVOKED
@@ -21,12 +28,14 @@ async function main() {
     console.log(`CREATED TERMS: ${createManyTerms}`);
 };
 
-main().then(
-    async() => {
-        await prisma.$disconnect()
-    }
-).catch(async (e) => {
+main()
+.then(async () => {
+    await prisma.$disconnect();
+    await pool.end();
+  })
+.catch(async (e) => {
     console.error(e);
     await prisma.$disconnect();
+    await pool.end();
     process.exit(1);
 }); 

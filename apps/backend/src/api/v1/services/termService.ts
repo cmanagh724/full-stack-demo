@@ -12,7 +12,11 @@ import { prisma } from "../../../../lib/prisma";
  */
 export const fetchAllTerms = async(): Promise<Term[]> => {
     // get all records in the term table
-    return prisma.term.findMany();
+    return (await prisma.term.findMany({
+        orderBy: {
+            title: "asc"
+        }
+    }));
 }
 
 export const getTermById = async(id: number): Promise<Term | null> => {

@@ -1,6 +1,6 @@
 import { Term } from "@prisma/client";
 
-export const termSeedData: Omit<Term, 'id'>[] = [
+export const termSeedData = [
 {
     title: 'API',
     definition: 'An API (Application Programming Interface) is a set of functions and protocols that allow communication between software components.',

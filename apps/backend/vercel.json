@@ -1,9 +1,0 @@
-{
-   "relatedProjects": ["full-stack-demo-frontend"],
-   "rewrites": [
-      {
-            "source": "/(.*)",
-            "destination": "/api" 
-      }
-   ]
-}

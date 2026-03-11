@@ -1,10 +1,9 @@
 {
-   "relatedProjects": ["<front-end-project-ID>"],
-
-   "git": {
-     "deploymentEnabled": {
-         "*": false,
-         "main": true
-     }
- }
+   "relatedProjects": ["full-stack-demo-frontend"],
+   "rewrites": [
+      {
+            "source": "/(.*)",
+            "destination": "/api" 
+      }
+   ]
 }
